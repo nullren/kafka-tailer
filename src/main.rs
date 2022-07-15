@@ -28,7 +28,7 @@ fn main() {
             for m in ms.messages() {
                 let topic = ms.topic();
                 let partition = ms.partition();
-                let offset = m.offset();
+                let offset = m.offset;
                 let k = String::from_utf8_lossy(m.key);
                 let v = String::from_utf8_lossy(m.value);
                 println!("{}/{}/{}\tK:{} V:{}", topic, partition, offset, k, v);
