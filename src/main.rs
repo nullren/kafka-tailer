@@ -26,7 +26,11 @@ fn main() {
     loop {
         for ms in consumer.poll().unwrap().iter() {
             for m in ms.messages() {
-                println!("{:?}", m);
+                let partition = ms.partition();
+                let offset = m.offset();
+                let k = String::from_utf8_lossy(m.key);
+                let v = String::from_utf8_lossy(m.value);
+                println!("{}/{}\tK:{} V:{}", partition, offset, k, v);
             }
             consumer.consume_messageset(ms).unwrap();
         }
